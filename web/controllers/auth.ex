@@ -19,6 +19,11 @@ defmodule Rumbl.Auth do
     |> configure_session(renew: true)
   end
 
+  def log_out(conn) do
+    conn
+    |> configure_session(drop: true)
+  end
+
   def log_in_by_username_and_password(conn, username, given_pass, opts) do
     repo = Keyword.fetch!(opts, :repo)
     user = repo.get_by(Rumbl.User, username: username)
